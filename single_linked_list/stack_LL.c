@@ -15,7 +15,7 @@ void main()
   int choice,element,a=1,n=0;
 
   while(a==1){
-    printf("\n1. Inserting a Node \n2)Deleting a node  \n3)Print the list \n");
+    printf("\n1. Inserting a Node \n2)Deleting a node  \n3)Print the stack \n");
     printf("Enter your choice \n");
     scanf("%d",&choice);
       switch (choice)
@@ -34,11 +34,14 @@ void main()
                 ptr =first;
                 ptr->next = NULL;
                 break;
-       case 2:  while(ptr != NULL){
+       case 2:  if(ptr == NULL){
+                    printf("NO element in stack");
+                }
+                while(ptr->next != NULL){
                 ptr = temp;
                 ptr = ptr->next;
                 }
-                printf("Deleted element is %d",ptr->data);
+                printf("Deleted element is %d \n",ptr->data);
                 temp->next = NULL;
                 free(ptr);
                 break;
