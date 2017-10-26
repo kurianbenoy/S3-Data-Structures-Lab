@@ -1,8 +1,8 @@
-#include <stdio.h>
+  #include <stdio.h>
  void main()
 {
  int n,A[20],i,j,c;
- printf("Enter the number of elements:");
+ printf("Enter the gfsdjlkof elements:");
  scanf("%d",&n);
  printf("Enter the elements:\n");
  for(i=0;i<n;i++)

@@ -1,3 +1,6 @@
+/* A Program to input a word and do hashing for each letter and store the valuein a corresponding Hash table
+	Programmed by: Kurian Benoy */
+
 #include<stdio.h>
 #define HASH_FUNCTION 13
 
@@ -13,8 +16,8 @@ void main()
 	char flag='f';
 	char a[100];
 	int hash[100];
-	printf("Enter the no of letters\n");
-	scanf("%d",&n);
+	// printf("Enter the no of letters\n");
+	// scanf("%d",&n);
 	printf("Enter THE string\n");
 	scanf("%s",a);
 
@@ -34,17 +37,21 @@ void main()
 			flag='t';
 		}
 
-		else 
-		{	
-			index=index+1;
-			if(hash[index]==-1)
-				hash[index] = key;
-		}
+		else if(hash[index] ==key)
+			{
+			}
 
+		else {
+			index=index+1;
+			if(hash[index]==-1){
+				hash[index] = key;
+
+		}
 	}
+}
 
 	for (i=0;i<20;i++)
-	{
+
 		printf("INDEX: %d value is : %d \n",i,hash[i]);
-	}
+
 }
