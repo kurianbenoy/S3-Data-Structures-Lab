@@ -26,12 +26,10 @@ int main()
         cout<<"\n Enter Information for the new Node ....";
         cin>>inf;
         cout<<"\n Creating New Model !! Press Enter to continue ......";
-        // system("pause");
         newptr = Create_New_Node(inf);
         if (newptr != NULL)
         {
             cout<<"\n New Node Creted sucessfully ... ";
-            // system("pause");
         }
         else
         {
