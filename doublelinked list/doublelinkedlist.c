@@ -22,12 +22,13 @@ void printList(struct Node *head)
 
 void main()
 {
-  int choice,element,a=1,no;
-  int i,value,key,k;
-  struct Node *head = NULL ,*ptr,*prev,*newptr,*pnode ;
+  int choice,element,no;
+  int i,value,key,k,flag=0;
+  struct Node *head = NULL ,*ptr,*prev,*newptr,*ptr1 ;
 
   printf("Enter the no of elements \n");
   scanf("%d",&no);
+  int pos = 1;
 
 
   for(i=0;i<no;i++){
@@ -46,9 +47,9 @@ void main()
   }
 
 
-  while(a==1){
-    printf("\n DOUBLE LINKED LIST \n1. Adding a node at Front\n2. Adding a node at the end \n3. Inseting a node at any position \n4) Printing the linked list \n");
-    printf("Enter your choice \n");
+  while(1){
+    printf("\n DOUBLE LINKED LIST \n1. Adding a node at Front\n2. Adding a node at the end \n3. Inseting a node at any position \n4) Printing the linked list \n5)Exit");
+    printf("\nEnter your choice \n");
     scanf("%d",&choice);
       switch (choice)
       {
@@ -69,7 +70,7 @@ void main()
                while(ptr->right != NULL){
                  ptr = ptr->right;
                }
-               prev = head;
+               // prev = head;
                if(ptr == NULL)
                {
                  ptr->right = newptr;
@@ -78,52 +79,43 @@ void main()
                }
                break;
 
-        case 3:printf("INSETION AT ANY POSITION\n");
-        pnode = (struct Node *)malloc(sizeof(struct Node));
-        printf("Enter the position you would like to insert the value (1st element = position 1):");
-        scanf("%d", &k);
-        if(k<=0 )
-        {
-          printf("Position requested much beyond the permissible range");
-          break;
-        }
-        i = 1;
-        while(i<k)
-        {
-          ptr = ptr->right;
-          i++;
-        }
-        // if(k == n+1)
-        // {
-        //   while(ptr->right!=NULL)
-        //   {
-        //     ptr = ptr->right;
-        //   }
-        //   pnode->right = NULL;
-        //   pnode->left = ptr;
-        //   ptr->right = pnode;
-        // }
-        while(1)
-        {
-          pnode->left = ptr->left;
-          if(ptr->left != NULL)
-            ptr->left->right = pnode;
-          else
-            head = pnode;
-          pnode->right = ptr;
-          ptr->left = pnode;
-        }
-        printf("Enter the value to be inserted: ");
-        scanf("%d", &pnode->data);
-        n++;
-        break;
+        case 3:printf("INSERTION AT Any position in linked list \n");
+               printf("Enter the position after which  element is inserted \n");
+               scanf("%d",&key);
+               newptr = (struct Node*)malloc(sizeof(struct Node));
+               
+               printf("Enter the element \n");
+               scanf("%d",&newptr->data);
+
+              if(key == 1)
+              {
+                newptr->left = NULL;
+                newptr->right = ptr;
+                head->left = newptr;
+                head = newptr;
+              } 
+
+              else
+              {
+                while((ptr!=NULL)&&(pos<key))
+                {
+                  key++;
+                  ptr1 = ptr;
+                  ptr = ptr->right;
+                  }
+                 ptr1->right = newptr;
+                 newptr->right = ptr;
+                }
+                
+               break;
 
         case 4: printList(head);
                 break;
+        case 5: exit(0);
+                break;
 
-      }
-      printf("Do you want to continue \n");
-      scanf("%d",&a);
+        }
+      
     }
 
 }
