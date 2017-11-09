@@ -24,7 +24,7 @@ void main()
 {
   int choice,element,no;
   int i,value,key,k,flag=0;
-  struct Node *head = NULL ,*ptr,*prev,*newptr,*ptr1 ;
+  struct Node *head = NULL ,*ptr,*prev,*newptr,*ptr1,*previous,*sp,*sv ;
 
   printf("Enter the no of elements \n");
   scanf("%d",&no);
@@ -48,7 +48,7 @@ void main()
 
 
   while(1){
-    printf("\n DOUBLE LINKED LIST \n1. Adding a node at Front\n2. Adding a node at the end \n3. Inseting a node at any position \n4) Printing the linked list \n5)Exit");
+    printf("\n DOUBLE LINKED LIST \n1. Adding a node at Front\n2. Adding a node at the end \n3. Inseting a node at any position \n4)Deletion of linked list at front\n5)Deletion of linked list at any position \n6) Printing the linked list \n6)Exit");
     printf("\nEnter your choice \n");
     scanf("%d",&choice);
       switch (choice)
@@ -108,10 +108,36 @@ void main()
                 }
                 
                break;
-
-        case 4: printList(head);
+        case 4: ptr = head;
+                
+                if (ptr == NULL){
+                        printf("Element is not present in an array");
+                    }
+                printf("Deleted value is:%d",ptr->data);
+                head = head->right;
+                free(ptr);
+                head->left = NULL;
                 break;
-        case 5: exit(0);
+        case 5: printf("Enter the position after which  element is deleted \n");
+               scanf("%d",&key);
+               while(ptr->data != key)
+               {
+                  ptr =  ptr->right;
+               }
+               if(ptr->data = key)
+               {
+                  printf("Deleted element : %d \n",ptr->data);
+                  sp = ptr->left;
+                  sv = ptr->right;
+                  sv->left = sp;
+                  sp->right = sv;
+                  free(ptr);
+               }
+               break;
+
+        case 6: printList(head);
+                break;
+        case 7: exit(0);
                 break;
 
         }
