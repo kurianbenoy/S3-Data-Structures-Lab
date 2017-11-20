@@ -1,67 +1,71 @@
+// Recurssive implentation of Quick sort
+
 #include <stdlib.h>
 #include <stdio.h>
 
-void swap(int *a, int *b) 
+// Partition method
+int partition(int A[100],int left,int right)
 {
-    int c = *a;
-    *a = *b;
-    *b = c;
-}
-
-int partition(int numbers[], int first, int last)
-{
-    int pivot = numbers[last];
-    int i = first - 1;
-    int j;
-
-    for(j = first; j < last; j ++)
-        // If the current element is smaller than or equal to the pivot, put the current
-        // element at the beginning of the array
-        if(numbers[j] <= pivot)
+  int loc,temp;
+  loc = left;
+  while(left<right)
+  {
+      while((A[loc] <= A[right])&&(loc<left))
+      {
+        right -=1;
+      }
+        if(A[loc] > A[right])
         {
-            i ++;
-            swap(&numbers[i], &numbers[j]);
+          temp = A[loc];
+          A[loc] = A[right];
+          A[right] = temp;
+          loc = right;
+          left +=1;
         }
-
-    swap(&numbers[i + 1], &numbers[last]);
-    return (i + 1);
+      while(A[loc] < A[left])
+      {
+        left +=1;
+      }
+      if(A[loc]< A[left])
+      {
+        temp = A[loc];
+        A[loc] = A[left];
+        A[left] = temp;
+        loc = left;
+        right -=1;
+      }
+  return loc;
+}
 }
 
-void quicksort(int numbers[], int first, int last)
+void Quicksort(int A[150],int first,int last)
 {
-    // while the array is not sorted
-    if(first < last)
-    {
-        // we partition the given array between the given bounds
-        int i = partition(numbers, first, last);
-
-        // sort the first half and the second half
-        quicksort(numbers, first, i - 1);
-        quicksort(numbers, i + 1, last);
-    }
+  int p;
+  if(first<last)
+  {
+  p =  partition(A,first,last);
+  Quicksort(A,first,p-1);
+  Quicksort(A,p+1,last);
+}
 }
 
-int main(void)
+void main()
 {
-    int *numbers = NULL;
-    int n = 0, i = 0;
+  int array[100];
+  int n,i;
+  printf("Enter the no of elements of array\n");
+  scanf("%d",&n);
 
-    // read the input
-    printf("Number of elements:\n");
-    scanf("%d", &n);
+  printf("Enter the elements in array \n");
+  for(i=0;i<n;i++){
+    scanf("%d",&array[i]);
+  }
 
-    // allocate memory
-    numbers = (int*)calloc(n, sizeof(int));
-    for(i = 0; i < n; i ++)
-        scanf("%d", &numbers[i]);
+  Quicksort(array,0,n-1);
 
-    // sort the array
-    quicksort(numbers, 0, n - 1);
-
-    // print the array
-    for(i = 0; i < n;i ++)
-        printf("%d ", numbers[i]);
-    printf("\n");
-
-    return 0;
-}|  o
+  printf("Sorting the elements are : \n");
+  for(i=0;i<n;i++)
+  {
+    printf("%d\nl",array[i]);
+  }
+}
